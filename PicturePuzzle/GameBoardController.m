@@ -7,6 +7,7 @@
 //
 
 #import "GameBoardController.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define kNumRows 3
 #define kNumColums 3
@@ -14,6 +15,7 @@
 @interface GameBoardController ()
 
 - (void)moveGameTile:(GameTile *)aGameTile toFrame:(CGRect)aFrame;
+- (void)showTilesCompletion:(void (^)(BOOL finished))completion;
 
 @end
 
@@ -22,12 +24,57 @@
 
 
 #pragma mark - Areas to animate
+@synthesize tileContainer = _tileContainer;
+@synthesize drawView = _paintView;
 
 - (void)moveGameTile:(GameTile *)aGameTile toFrame:(CGRect)aFrame
 {
-    aGameTile.frame = aFrame;
+    [self.tileContainer bringSubviewToFront:aGameTile];
+
+    [UIView animateWithDuration:0.1
+                          delay:0
+                        options:UIViewAnimationCurveEaseInOut
+                     animations:^{
+                         aGameTile.transform = CGAffineTransformMakeScale(0.9, 0.9);
+                     }
+                     completion:^(BOOL finished) {
+                         [UIView animateWithDuration:0.4
+                                               delay:0
+                                             options:UIViewAnimationCurveEaseInOut
+                                          animations:^{
+                                              aGameTile.center = CGPointMake(CGRectGetMidX(aFrame), CGRectGetMidY(aFrame));
+                                          }
+                                          completion:^(BOOL finished) {
+                                              [UIView animateWithDuration:0.1
+                                                                    delay:0
+                                                                  options:UIViewAnimationCurveEaseInOut
+                                                               animations:^{
+                                                                   aGameTile.transform = CGAffineTransformIdentity;
+                                                                   aGameTile.frame = aFrame;
+                                                               }
+                                                               completion:nil];
+                                          }];
+                     }];
 }
 
+- (void)showTilesCompletion:(void (^)(BOOL finished))completion
+{
+    [self.tiles enumerateObjectsUsingBlock:^(GameTile *aTile, NSUInteger idx, BOOL *stop) {
+        aTile.layer.transform = CATransform3DMakeRotation(M_PI_2, 1.0, 0, 0);
+        [UIView animateWithDuration:1
+                              delay:0.1 * idx
+                            options:UIViewAnimationCurveEaseInOut
+                         animations:^{
+                             aTile.layer.transform = CATransform3DIdentity;
+                         }
+                         completion:^(BOOL finished) {
+                             if (idx + 1 == self.tiles.count)
+                             {
+                                 completion(finished);
+                             }
+                         }];
+    }];
+}
 
 
 
@@ -95,13 +142,18 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 
+    [self becomeFirstResponder];
     [self initializeTiles];
     self.selectedTiles = [NSMutableSet set];
-    [self randomizeBoard];
+    [self showTilesCompletion:^(BOOL finished) {
+        [self randomizeBoard];
+    }];
 }
 
 - (void)viewDidUnload
 {
+    [self setTileContainer:nil];
+    [self setDrawView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -149,7 +201,7 @@
     GameTile *tile = [[GameTile alloc] initWithFrame:frame gameImage:self.gameImage tileImageBounds:tileImageBounds];
     tile.delegate = self;
 
-    [self.view addSubview:tile];
+    [self.tileContainer addSubview:tile];
     [self.tiles addObject:tile];
 }
 
@@ -180,8 +232,6 @@
     //    NSLog(@"imageBounds: %@", NSStringFromCGRect(_gameImageBounds));
 }
 
-
-
 - (void)clearSelection
 {
     [self.selectedTiles enumerateObjectsUsingBlock:^(GameTile *gameTile, BOOL *stop) {
@@ -199,6 +249,8 @@
 
         GameTile *firstTile = [tiles objectAtIndex:0];
         GameTile *secondTile = [tiles lastObject];
+
+        [self.drawView presentLineFrom:firstTile.center to:secondTile.center];
 
         CGRect firstPosition = firstTile.frame;
         CGRect secondPosition = secondTile.frame;

@@ -32,7 +32,9 @@
 {
     _selected = aSelected;
 
-    self.selectIndicator.alpha = _selected ? 0.5 : 0;
+    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationCurveEaseInOut animations:^{
+        self.selectIndicator.alpha = _selected ? 0.2 : 0;
+    } completion:nil];
 }
 
 

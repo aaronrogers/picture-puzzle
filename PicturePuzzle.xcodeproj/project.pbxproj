@@ -17,6 +17,8 @@
 		9301E5351600288A00041D93 /* GameBoardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9301E5341600288A00041D93 /* GameBoardController.m */; };
 		9301E540160029D400041D93 /* beach.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9301E53F160029D300041D93 /* beach.jpg */; };
 		9301E54416002C8C00041D93 /* GameTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 9301E54316002C8C00041D93 /* GameTile.m */; };
+		9301E59B16016B4A00041D93 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9301E59A16016B4A00041D93 /* QuartzCore.framework */; };
+		9301E59E160170C600041D93 /* DrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9301E59D160170C600041D93 /* DrawView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,9 @@
 		9301E53F160029D300041D93 /* beach.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = beach.jpg; sourceTree = "<group>"; };
 		9301E54216002C8B00041D93 /* GameTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTile.h; sourceTree = "<group>"; };
 		9301E54316002C8C00041D93 /* GameTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameTile.m; sourceTree = "<group>"; };
+		9301E59A16016B4A00041D93 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9301E59C160170C600041D93 /* DrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawView.h; sourceTree = "<group>"; };
+		9301E59D160170C600041D93 /* DrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9301E59B16016B4A00041D93 /* QuartzCore.framework in Frameworks */,
 				9301E51F1600288900041D93 /* UIKit.framework in Frameworks */,
 				9301E5211600288900041D93 /* Foundation.framework in Frameworks */,
 				9301E5231600288900041D93 /* CoreGraphics.framework in Frameworks */,
@@ -72,6 +78,7 @@
 		9301E51D1600288900041D93 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9301E59A16016B4A00041D93 /* QuartzCore.framework */,
 				9301E51E1600288900041D93 /* UIKit.framework */,
 				9301E5201600288900041D93 /* Foundation.framework */,
 				9301E5221600288900041D93 /* CoreGraphics.framework */,
@@ -85,6 +92,8 @@
 				9301E53F160029D300041D93 /* beach.jpg */,
 				9301E52D1600288A00041D93 /* AppDelegate.h */,
 				9301E52E1600288A00041D93 /* AppDelegate.m */,
+				9301E59C160170C600041D93 /* DrawView.h */,
+				9301E59D160170C600041D93 /* DrawView.m */,
 				9301E5301600288A00041D93 /* MainStoryboard.storyboard */,
 				9301E5331600288A00041D93 /* GameBoardController.h */,
 				9301E5341600288A00041D93 /* GameBoardController.m */,
@@ -174,6 +183,7 @@
 				9301E52F1600288A00041D93 /* AppDelegate.m in Sources */,
 				9301E5351600288A00041D93 /* GameBoardController.m in Sources */,
 				9301E54416002C8C00041D93 /* GameTile.m in Sources */,
+				9301E59E160170C600041D93 /* DrawView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +263,7 @@
 		9301E5391600288A00041D93 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PicturePuzzle/PicturePuzzle-Prefix.pch";
 				INFOPLIST_FILE = "PicturePuzzle/PicturePuzzle-Info.plist";

@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "GameTile.h"
+#import "DrawView.h"
 
 @interface GameBoardController : UIViewController <GameTileDelegate>
+@property (weak, nonatomic) IBOutlet UIView *tileContainer;
+@property (weak, nonatomic) IBOutlet DrawView *drawView;
 
 // Private
 @property (nonatomic, readonly) UIImage *gameImage;
