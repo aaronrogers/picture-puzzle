@@ -21,20 +21,12 @@
 
 - (void)setImageViewImageFromImage:(UIImage *)image bounds:(CGRect)imageBounds
 {
-    CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, imageBounds);
-    UIImage *result = [UIImage imageWithCGImage:imageRef scale:image.scale orientation:image.imageOrientation];
-    CGImageRelease(imageRef);
 
-    self.imageView.image = result;
 }
 
 - (void)setSelected:(BOOL)aSelected
 {
     _selected = aSelected;
-
-    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationCurveEaseInOut animations:^{
-        self.selectIndicator.alpha = _selected ? 0.2 : 0;
-    } completion:nil];
 }
 
 

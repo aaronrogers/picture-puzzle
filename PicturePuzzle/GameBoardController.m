@@ -29,51 +29,10 @@
 
 - (void)moveGameTile:(GameTile *)aGameTile toFrame:(CGRect)aFrame
 {
-    [self.tileContainer bringSubviewToFront:aGameTile];
-
-    [UIView animateWithDuration:0.1
-                          delay:0
-                        options:UIViewAnimationCurveEaseInOut
-                     animations:^{
-                         aGameTile.transform = CGAffineTransformMakeScale(0.9, 0.9);
-                     }
-                     completion:^(BOOL finished) {
-                         [UIView animateWithDuration:0.4
-                                               delay:0
-                                             options:UIViewAnimationCurveEaseInOut
-                                          animations:^{
-                                              aGameTile.center = CGPointMake(CGRectGetMidX(aFrame), CGRectGetMidY(aFrame));
-                                          }
-                                          completion:^(BOOL finished) {
-                                              [UIView animateWithDuration:0.1
-                                                                    delay:0
-                                                                  options:UIViewAnimationCurveEaseInOut
-                                                               animations:^{
-                                                                   aGameTile.transform = CGAffineTransformIdentity;
-                                                                   aGameTile.frame = aFrame;
-                                                               }
-                                                               completion:nil];
-                                          }];
-                     }];
 }
 
 - (void)showTilesCompletion:(void (^)(BOOL finished))completion
 {
-    [self.tiles enumerateObjectsUsingBlock:^(GameTile *aTile, NSUInteger idx, BOOL *stop) {
-        aTile.layer.transform = CATransform3DMakeRotation(M_PI_2, 1.0, 0, 0);
-        [UIView animateWithDuration:1
-                              delay:0.1 * idx
-                            options:UIViewAnimationCurveEaseInOut
-                         animations:^{
-                             aTile.layer.transform = CATransform3DIdentity;
-                         }
-                         completion:^(BOOL finished) {
-                             if (idx + 1 == self.tiles.count)
-                             {
-                                 completion(finished);
-                             }
-                         }];
-    }];
 }
 
 
