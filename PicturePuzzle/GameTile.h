@@ -23,8 +23,4 @@
 
 - (id)initWithFrame:(CGRect)frame gameImage:(UIImage *)gameImage tileImageBounds:(CGRect)tileImageBounds;
 
-// Private
-@property (nonatomic, strong) UIView *selectIndicator;
-@property (nonatomic, strong) UIView *tapView;
-
 @end

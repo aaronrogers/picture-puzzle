@@ -11,7 +11,8 @@
 @interface GameTile ()
 
 @property (nonatomic, strong) UIImageView *imageView;
-
+@property (nonatomic, strong) UIView *selectIndicator;
+@property (nonatomic, strong) UIView *tapView;
 
 - (void)setImageViewImageFromImage:(UIImage *)image bounds:(CGRect)imageBounds;
 
