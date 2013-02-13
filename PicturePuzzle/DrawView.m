@@ -38,7 +38,7 @@
 
     CGContextRef context = UIGraphicsGetCurrentContext();
 
-    CGContextSetRGBStrokeColor(context, 0, 0, 0.5, 0.75);
+    CGContextSetRGBStrokeColor(context, 0.5, 0, 0, 0.75);
     CGContextSetLineWidth(context, 5);
     CGContextSetLineCap(context, kCGLineCapRound);
 
